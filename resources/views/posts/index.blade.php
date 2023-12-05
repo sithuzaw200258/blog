@@ -13,7 +13,7 @@
                             </div>
 
                             <div class="">
-                                <a href="{{ route('post.create') }}" class="btn btn-primary">Create Post</a>
+                                <a href="{{ route('posts.create') }}" class="btn btn-primary">Create Post</a>
                             </div>
                         </div>
                     </div>
@@ -37,14 +37,14 @@
                             </div>
                             <div class="d-flex justify-content-between">
                                 <div class="d-flex justify-content-center align-items-center">
-                                    <a href="{{ route('post.edit', $post->id) }}" class="">
+                                    <a href="{{ route('posts.edit', $post->id) }}" class="">
                                         <button class="btn btn-sm btn-outline-warning">
                                             <span class="material-symbols-outlined">
                                                 edit
                                             </span>
                                         </button>
                                     </a>
-                                    <form action="{{ route('post.destroy', $post->id) }}" method="POST" class="mx-2">
+                                    <form action="{{ route('posts.destroy', $post->id) }}" method="POST" class="mx-2">
                                         @csrf
                                         @method('delete')
                                         <button class="btn btn-sm btn-outline-danger">
@@ -54,7 +54,7 @@
                                         </button>
                                     </form>
                                 </div>
-                                <a href="{{ route('post.show', $post->id) }}" class="btn btn-link">See more...</a>
+                                <a href="{{ route('posts.show', $post->id) }}" class="btn btn-link">See more...</a>
                             </div>
                         </div>
                     </div>

@@ -11,11 +11,11 @@
                                 <h2 class="mb-0">Edit Post</h2>
                             </div>
                             <div class="">
-                                <a href="{{ route('post.index') }}" class="btn btn-primary">Back to home</a>
+                                <a href="{{ route('posts.index') }}" class="btn btn-primary">Back to home</a>
                             </div>
                         </div>
 
-                        <form action="{{ route('post.update',$post->id) }}" method="POST">
+                        <form action="{{ route('posts.update',$post->id) }}" method="POST">
                             @method('PUT')
                             @csrf
                             <div class="mb-3">

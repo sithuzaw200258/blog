@@ -12,7 +12,7 @@
                             </div>
 
                             <div class="">
-                                <a href="{{ route('post.index') }}" class="btn btn-primary">Home</a>
+                                <a href="{{ route('posts.index') }}" class="btn btn-primary">Home</a>
                             </div>
                         </div>
                     </div>

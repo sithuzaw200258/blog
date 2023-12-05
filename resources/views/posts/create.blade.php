@@ -11,11 +11,11 @@
                                 <h2 class="mb-0">Create New Post</h2>
                             </div>
                             <div class="">
-                                <a href="{{ route('post.index') }}" class="btn btn-primary">Back to home</a>
+                                <a href="{{ route('posts.index') }}" class="btn btn-primary">Back to home</a>
                             </div>
                         </div>
 
-                        <form action="{{ route('post.store') }}" method="POST">
+                        <form action="{{ route('posts.store') }}" method="POST">
                             @csrf
                             <div class="mb-3">
                                 <label for="title">Post Title</label>
