@@ -16,7 +16,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::paginate(10);
         return view("posts.index",compact('posts'));
     }
 
@@ -88,7 +88,7 @@ class PostController extends Controller
             'title' => 'bail|required|unique:posts,title|min:5',
             'description' => 'required|min:5'
         ]);
-        
+
         $post = Post::findOrFail($id);
         $post->title = $request->title;
         $post->description = $request->description;
