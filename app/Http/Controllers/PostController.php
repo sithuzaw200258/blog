@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
 {
@@ -37,6 +38,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'bail|required|unique:posts,title|min:5',
+            'description' => 'required|min:5'
+        ]);
+
         $post = new Post();
         $post->title = $request->title;
         $post->description = $request->description;
@@ -63,7 +69,7 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Request $request,$id)
     {
         $post = Post::findOrFail($id);
         return view('posts.edit',compact('post'));
@@ -78,6 +84,11 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $request->validate([
+            'title' => 'bail|required|unique:posts,title|min:5',
+            'description' => 'required|min:5'
+        ]);
+        
         $post = Post::findOrFail($id);
         $post->title = $request->title;
         $post->description = $request->description;
