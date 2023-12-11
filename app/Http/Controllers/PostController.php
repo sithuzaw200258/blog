@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 use Illuminate\Support\Facades\Validator;
 
 class PostController extends Controller
@@ -16,7 +18,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(10);
+        $posts = Post::paginate(5);
         return view("posts.index",compact('posts'));
     }
 
@@ -36,19 +38,15 @@ class PostController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
-        $request->validate([
-            'title' => 'bail|required|unique:posts,title|min:5',
-            'description' => 'required|min:5'
-        ]);
 
         $post = new Post();
         $post->title = $request->title;
         $post->description = $request->description;
         $post->save();
 
-        return redirect()->route('post.index')->with('message','Post is created successfully.');
+        return redirect()->route('posts.index')->with('message','Post is created successfully.');
     }
 
     /**
@@ -57,9 +55,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        $post = Post::findOrFail($id);
+        // $post = Post::findOrFail($id);
         return view('posts.show',compact('post'));
     }
 
@@ -69,9 +67,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Request $request,$id)
+    public function edit(Post $post)
     {
-        $post = Post::findOrFail($id);
+        // $post = Post::findOrFail($id);
         return view('posts.edit',compact('post'));
     }
 
@@ -82,19 +80,18 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
         $request->validate([
-            'title' => 'bail|required|unique:posts,title|min:5',
+            'title' => "bail|required|unique:posts,title,$post->id|min:5",
             'description' => 'required|min:5'
         ]);
-
-        $post = Post::findOrFail($id);
+        // $post = Post::findOrFail($id);
         $post->title = $request->title;
         $post->description = $request->description;
         $post->update();
 
-        return redirect()->route('post.index')->with('message','Post is updated successfully.');
+        return redirect()->route('posts.index')->with('message','Post is updated successfully.');
     }
 
     /**
@@ -103,10 +100,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        $post = Post::findOrFail($id);
+        // $post = Post::findOrFail($id);
         $post->delete();
-        return redirect()->route('post.index')->with('message','Post is deleted successfully.');
+        return redirect()->route('posts.index')->with('message','Post is deleted successfully.');
     }
 }

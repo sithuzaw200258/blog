@@ -10,9 +10,6 @@
                             <div class="">
                                 <h2 class="mb-0">Create New Post</h2>
                             </div>
-                            <div class="">
-                                <a href="{{ route('posts.index') }}" class="btn btn-primary">Back to home</a>
-                            </div>
                         </div>
 
                         <form action="{{ route('posts.store') }}" method="POST">

@@ -10,10 +10,6 @@
                             <div class="">
                                 <h2 class="mb-0">Detail Post</h2>
                             </div>
-
-                            <div class="">
-                                <a href="{{ route('posts.index') }}" class="btn btn-primary">Home</a>
-                            </div>
                         </div>
                     </div>
                 </div>
